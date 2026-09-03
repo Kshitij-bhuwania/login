@@ -3,67 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register Portal</title>
+    <title>Login Portal</title>
     <style>
         :root {
             --primary: #4f46e5;
             --primary-hover: #4338ca;
-            --bg-color: #f3f4f6;
-            --card-bg: #ffffff;
-            --text-color: #1f2937;
+            --bg-color: #1e293b;
+            --card-bg: #334155;
+            --text-color: #f8fafc;
             --error-color: #ef4444;
-            --success-color: #10b981;
+            --success-color: #22c55e;
         }
-
-   body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    body {
+            font-family: Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
-  .container {
+ .container {
             width: 100%;
             max-width: 400px;
             background: var(--card-bg);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         h2 {
             margin-top: 0;
-            color: var(--text-color);
+            color: #fbbf24;
             text-align: center;
         }
-     .form-group {
+
+  .form-group {
             margin-bottom: 15px;
         }
-    label {
-            display: block;
+
+  label {
+        display: block;
             margin-bottom: 6px;
-            font-weight: 600;
+            font-weight: bold;
             font-size: 14px;
         }
-     input {
-            width: 100%;
+
+  input {
+          width: 100%;
             padding: 10px;
             box-sizing: border-box;
-            border: 1px solid #d1d5db;
+            border: 1px solid #475569;
+            background: #1e293b;
+            color: white;
             border-radius: 6px;
             font-size: 14px;
         }
-      input:focus {
-        outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
 
-  button {
+ button {
             width: 100%;
             padding: 10px;
             background-color: var(--primary);
@@ -71,184 +70,75 @@
             color: white;
             border-radius: 6px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
             transition: background-color 0.2s;
             margin-top: 5px;
         }
-    button:hover {
+
+  button:hover {
             background-color: var(--primary-hover);
         }
-    .error-msg {
+
+  .error-msg {
             color: var(--error-color);
             font-size: 13px;
             text-align: center;
             margin-bottom: 12px;
         }
-    .success-msg {
-            color: var(--success-color);
-            font-size: 13px;
-            text-align: center;
-            margin-bottom: 12px;
-        }
 
-  .hidden {
-            display: none !important;
-        }
-
-   .switch-text {
+.switch-text {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
-            color: #4b5563;
+            color: #cbd5e1;
         }
-              .switch-text a {
-            color: var(--primary);
+
+  .switch-text a {
+            color: #fbbf24;
             text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-    .switch-text a:hover {
-            text-decoration: underline;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-  <!-- LOGIN CONTAINER -->
-    <div id="loginContainer" class="container">
-        <h2>Permanent Login Portal</h2>
-        <div id="loginError" class="error-msg hidden"></div>
-        <div id="loginSuccess" class="success-msg hidden"></div>
+ <div class="container">
+        <h2>Login Portal</h2>
+        <div id="loginError" class="error-msg"></div>
         
   <form onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label for="loginUser">Login ID / Username</label>
-                <input type="text" id="loginUser" autocomplete="username" required>
+                <label for="loginUser">Username</label>
+                <input type="text" id="loginUser" required>
             </div>
             <div class="form-group">
                 <label for="loginPass">Password</label>
-                <input type="password" id="loginPass" autocomplete="current-password" required>
+                <input type="password" id="loginPass" required>
             </div>
-            <button type="submit">Login & Go to Website</button>
-        </form>
-    <div class="switch-text">
-            Don't have an account? <a onclick="switchView('register')">Register here</a>
-        </div>
-    </div>
-   <!-- REGISTER CONTAINER -->
-    <div id="registerContainer" class="container hidden">
-        <h2>Permanent Registration</h2>
-        <div id="registerError" class="error-msg hidden"></div>
-            <form onsubmit="handleRegister(event)">
-        <div class="form-group">
-                <label for="regUser">Choose Login ID / Username</label>
-                <input type="text" id="regUser" required>
-            </div>
-            <div class="form-group">
-                <label for="regPass">Choose Password</label>
-                <input type="password" id="regPass" required>
-            </div>
-            
-   <button type="submit">Permanently Save Account</button>
+            <button type="submit">Login</button>
         </form>
 
-   <div class="switch-text">
-         Already have an account? <a onclick="switchView('login')">Login here</a>
+ <div class="switch-text">
+            Don't have an account? <a href="register.html">Register here</a>
         </div>
     </div>
 
  <script>
-        // Retrieve database permanently from browser storage (or create a default one)
-        function getDatabase() {
-            let db = localStorage.getItem("permanent_user_database");
-            if (!db) {
-                db = {
-                    "admin": { password: "password123", customData: "Default Admin Data" }
-                };
-                localStorage.setItem("permanent_user_database", JSON.stringify(db));
-            } else {
-                db = JSON.parse(db);
-            }
-            return db;
-        }
-
-        // Switch between Login and Register views
-        function switchView(view) {
-            document.getElementById("loginError").classList.add("hidden");
-            document.getElementById("loginSuccess").classList.add("hidden");
-            document.getElementById("registerError").classList.add("hidden");
-
-            if (view === 'register') {
-                document.getElementById("loginContainer").classList.add("hidden");
-                document.getElementById("registerContainer").classList.remove("hidden");
-            } else {
-                document.getElementById("registerContainer").classList.add("hidden");
-                document.getElementById("loginContainer").classList.remove("hidden");
-            }
-        }
-
-        // Permanently save new account and inputted data
-        function handleRegister(event) {
-            event.preventDefault();
-            const username = document.getElementById("regUser").value.trim();
-            const password = document.getElementById("regPass").value;
-            const customData = document.getElementById("regData").value.trim();
-            const errorElement = document.getElementById("registerError");
-
-            let db = getDatabase();
-
-            if (db[username]) {
-                errorElement.textContent = "This Login ID already exists! Choose another one.";
-                errorElement.classList.remove(hidden");
-                return;
-            }
-
-            // Save user into the permanent database object
-            db[username] = {
-                password: password,
-                customData: customData
-            };
-            
-            // Write permanently back to localStorage
-            localStorage.setItem("permanent_user_database", JSON.stringify(db));
-
-            // Notify user and switch to login view
-            document.getElementById("loginSuccess").textContent = "Account permanently saved! You can now log in.";
-            document.getElementById("loginSuccess").classList.remove("hidden");
-            
-            // Clear fields
-            document.getElementById("regUser").value = "";
-            document.getElementById("regPass").value = "";
-            document.getElementById("regData").value = "";
-
-            switchView('login');
-        }
-
-        // Handle Login and Redirect to target website
         function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById("loginUser").value.trim();
             const password = document.getElementById("loginPass").value;
-            const errorElement = document.getElementById("loginError");
+            
+            let db = JSON.parse(localStorage.getItem("app_users_db")) || {};
 
-            let db = getDatabase();
-
-            // Verify credentials against the permanent storage
             if (db[username] && db[username].password === password) {
-                // Save active login state
+                // Save active user session
                 localStorage.setItem("activeUser", username);
-                localStorage.setItem("activeUserData", db[username].customData);
-
-                errorElement.classList.add("hidden");
-
-                // TARGET WEBSITE URL: Change this to your destination link
-                const targetWebsite = "https://www.google.com";
-
-                // Redirect to the website upon successful match
-                window.location.href = targetWebsite;
+                
+                // Redirect straight to your summary/analytics dashboard page (change filename if yours is named differently)
+                window.location.href = "summary.html";
             } else {
-                errorElement.textContent = "Invalid Login ID or Password. Please try again.";
-                errorElement.classList.remove("hidden");
+                document.getElementById("loginError").textContent = "Invalid username or password.";
             }
         }
     </script>
