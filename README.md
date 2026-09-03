@@ -119,7 +119,7 @@
         </form>
 
  <div class="switch-text">
-            Don't have an account? <a href="register.html">Register here</a>
+            Don't have an account? <a href="https://kshitij-bhuwania.github.io/register/">Register here</a>
         </div>
     </div>
 
@@ -136,7 +136,7 @@
                 localStorage.setItem("activeUser", username);
                 
                 // Redirect straight to your summary/analytics dashboard page (change filename if yours is named differently)
-                window.location.href = "summary.html";
+                window.location.href = "https://kshitij-bhuwania.github.io/sales/";
             } else {
                 document.getElementById("loginError").textContent = "Invalid username or password.";
             }
